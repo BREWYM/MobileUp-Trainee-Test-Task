@@ -57,7 +57,10 @@ dependencies {
     // Retrofit with Kotlin serialization Converter
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.okhttp)
-//    implementation (libs.converter.gson)
+    implementation (libs.converter.gson)
+
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
     implementation(libs.kotlinx.serialization.json)
 

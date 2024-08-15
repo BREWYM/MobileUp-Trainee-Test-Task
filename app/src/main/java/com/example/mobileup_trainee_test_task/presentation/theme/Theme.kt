@@ -1,6 +1,5 @@
-package com.example.mobileup_trainee_test_task.ui.theme
+package com.example.mobileup_trainee_test_task.presentation.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

@@ -1,4 +1,4 @@
-package com.example.mobileup_trainee_test_task.ui.theme
+package com.example.mobileup_trainee_test_task.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
