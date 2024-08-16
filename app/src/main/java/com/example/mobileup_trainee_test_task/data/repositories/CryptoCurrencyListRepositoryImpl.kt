@@ -1,14 +1,16 @@
 package com.example.mobileup_trainee_test_task.data.repositories
 
 import com.example.mobileup_trainee_test_task.common.Constants
+import com.example.mobileup_trainee_test_task.common.Resource
 import com.example.mobileup_trainee_test_task.data.network.dto.CryptoCurrencyDto
 import com.example.mobileup_trainee_test_task.data.remote.retrofit_services.CryptoCurrencyListService
 import com.example.mobileup_trainee_test_task.domain.repositories.CryptoCurrencyListRepository
 import retrofit2.Retrofit
+import java.io.IOException
 
 
 class CryptoCurrencyListRepositoryImpl (
-    private val retrofit: Retrofit
+    retrofit: Retrofit
 ) : CryptoCurrencyListRepository {
 
 

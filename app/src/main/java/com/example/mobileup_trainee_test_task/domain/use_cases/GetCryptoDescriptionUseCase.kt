@@ -10,19 +10,19 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class GetCryptoDescriptionUseCase(
-    private val repository: CryptoDescriptionRepository
+    private val cryptoDescriptionRepository: CryptoDescriptionRepository
 ) {
     suspend operator fun invoke(id: String): Flow<Resource<CryptoDescription>> = flow{
         try {
             emit(Resource.Loading())
-            val cryptoDescription = repository.getCryptoDescription(id = id).toCryptoDescription()
-            emit(Resource.Success(cryptoDescription))
+            val cryptoDescription = cryptoDescriptionRepository.getCryptoDescription(id = id).toCryptoDescription()
+            emit(Resource.Success<CryptoDescription>(cryptoDescription))
 
         } catch (e: HttpException){
-            emit(Resource.Error(e.localizedMessage?: "An unexpected HTTP error occurred"))
+            emit(Resource.Error<CryptoDescription>(e.localizedMessage?: "An unexpected HTTP error occurred"))
 
         } catch (e: IOException){
-            emit(Resource.Error("An internet error occurred. Please check your connection "))
+            emit(Resource.Error<CryptoDescription>("An internet error occurred. Please check your connection "))
         }
     }
 }

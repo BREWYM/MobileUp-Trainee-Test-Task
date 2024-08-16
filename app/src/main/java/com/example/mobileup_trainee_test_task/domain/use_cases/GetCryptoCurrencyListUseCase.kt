@@ -10,22 +10,27 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class GetCryptoCurrencyListUseCase(
-    private val repository: CryptoCurrencyListRepository
+    private val cryptoCurrencyListRepository: CryptoCurrencyListRepository
 ) {
 
-    suspend operator fun invoke(currency: String): Flow<Resource<List<CryptoCurrency>>> = flow{
+    suspend operator fun invoke(currency: String): Flow<Resource<List<CryptoCurrency>>> = flow {
         try {
-            emit(Resource.Loading())
-            val cryptoCurrency = repository.getCryptoCurrencyList(currency).map {
+            emit(Resource.Loading<List<CryptoCurrency>>())
+            val cryptoCurrency = cryptoCurrencyListRepository.getCryptoCurrencyList(currency).map {
                 it.toCryptoCurrency()
             }
+            cryptoCurrency.forEach{ println(it)}
             emit(Resource.Success(cryptoCurrency))
 
-        } catch (e: HttpException){
-            emit(Resource.Error(e.localizedMessage?: "An unexpected HTTP error occurred"))
+        } catch (e: HttpException) {
+            emit(
+                Resource.Error<List<CryptoCurrency>>(
+                    e.localizedMessage ?: "An unexpected HTTP error occurred"
+                )
+            )
 
-        } catch (e: IOException){
-            emit(Resource.Error("An internet error occurred. Please check your connection "))
+        } catch (e: IOException) {
+            emit(Resource.Error<List<CryptoCurrency>>("An internet error occurred. Please check your connection "))
         }
     }
 }
