@@ -15,6 +15,8 @@ data class CryptoCurrencyDto(
     val name: String,
     @SerializedName("price_change_24h")
     val priceChange24h: Double,
+    @SerializedName("price_change_percentage_24h")
+    val priceChangePercentage: Double,
     @SerializedName("symbol")
     val symbol: String,
     )
@@ -26,6 +28,6 @@ fun CryptoCurrencyDto.toCryptoCurrency(): CryptoCurrency {
         name = name,
         image = image,
         currentPrice = currentPrice,
-        priceChange24h = priceChange24h
+        priceChangePercentage24h = priceChangePercentage
     )
 }

@@ -7,7 +7,7 @@ data class CryptoCurrency(
     val name: String,
     val image: String,
     val currentPrice: Double,
-    val priceChange24h: Double,
+    val priceChangePercentage24h: Double,
     ) {
 }
 

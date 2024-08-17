@@ -51,6 +51,8 @@ android {
 }
 
 dependencies {
+    //Coil
+    implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
     // Retrofit
     implementation(libs.retrofit)
