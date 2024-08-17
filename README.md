@@ -20,7 +20,7 @@
 
 * Второй UseCase с получением информации о конкретной криптовалюте -> 10 мин
 
-***5. Реализация репозиториев***
+***:tada:5. Реализация репозиториев***
 
 * В domain layer -> 5 мин
 
@@ -44,7 +44,10 @@ So far
 *Single Activity
 *Jetpack Compose
 *Retrofit2
-*Kotlinx Serialization либо Gson (пока не уверен)
+*Gson 
 *Coroutines
 *паттерн MVVM
+*Koin
+*Coil
+*Navigation
 ```
