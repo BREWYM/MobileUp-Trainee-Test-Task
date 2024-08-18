@@ -1,10 +1,10 @@
 package com.example.mobileup_trainee_test_task.presentation.crypto_currency_list
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +17,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -47,26 +48,56 @@ fun CryptoCurrencyListScreen(
     val state = viewModel.state.value
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Red),
-        topBar = {
-            Column(
-                modifier = Modifier
-                    .padding(bottom = 5.dp)
 
-            ) {
-                TopAppBar(
-                    modifier = Modifier,
-                    title = { Text(text = "Список криптовалют") },
+        modifier = Modifier
+        ,
+        topBar = {
+            Surface(shadowElevation = 8.dp,
+                modifier = Modifier) {
+                Column() {
+                    TopAppBar(
+
+                        modifier = Modifier
+                            .fillMaxWidth()
+
+
+                        ,
+                        title = {
+                            Column(
+                                verticalArrangement = Arrangement.SpaceBetween,
+                                horizontalAlignment = Alignment.Start
+
+                            ) {
+                                Text(
+                                    text = "Список криптовалют",
+                                    modifier = Modifier
+                                )
+
+                            }
+                        }
 
                     )
-                ChipList(
-                    modifier = Modifier.fillMaxWidth().align(Alignment.Start),
-                    currencies = Currency.entries,
-                    onCurrencyChange = { viewModel.selectedCurrencyChange(it) }
-                )
+                    Row(
+                        horizontalArrangement = Arrangement.Start,
+                        modifier = Modifier
+
+                    ){
+                        ChipList(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            selectedCurrency = viewModel.currency.value
+
+                            ,
+                            currencies = Currency.entries,
+                            onCurrencyChange = { viewModel.selectedCurrencyChange(it) }
+                        )
+                    }
+                }
+
+
             }
+
+
 
         }
 
@@ -114,21 +145,21 @@ fun CryptoCurrencyListScreen(
                         text = "Произошла какая-то ошибка :(\n" +
                                 "Попробуем снова?",
                         textAlign = TextAlign.Center,
-                        color = MaterialTheme.colorScheme.error,
+                        color = MaterialTheme.colorScheme.onError,
                         modifier = Modifier
                             .padding(horizontal = 20.dp)
                             .align(Alignment.CenterHorizontally)
                             ,
-                        style = TextStyle(color = MaterialTheme.colorScheme.onError)
+                        style = TextStyle(color = MaterialTheme.colorScheme.onError, fontSize = 16.sp)
 
                         )
 
 
                     Button(onClick = { viewModel.selectedCurrencyChange(viewModel.currency.value) },
-                        shape = RoundedCornerShape(8.dp),
+                        shape = RoundedCornerShape(6.dp),
                         modifier = Modifier
                             .align(Alignment.CenterHorizontally)
-                            .padding(44.dp)
+                            .padding(top = 30.dp)
                             ,
 
                         ) {

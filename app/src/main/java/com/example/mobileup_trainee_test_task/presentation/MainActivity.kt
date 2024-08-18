@@ -9,8 +9,8 @@ import androidx.compose.material3.Surface
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.mobileup.CryptoDescriptionScreen
 import com.example.mobileup_trainee_test_task.presentation.crypto_currency_list.CryptoCurrencyListScreen
-import com.example.mobileup_trainee_test_task.presentation.crypto_description.CryptoDescriptionScreen
 import com.example.mobileup_trainee_test_task.presentation.theme.MobileUpTraineeTestTaskTheme
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                             route = Screen.CryptoDescriptionScreen.route +"/{cryptoId}"
 
                         ){
-                            CryptoDescriptionScreen()
+                            CryptoDescriptionScreen(navigateBack = { navController.popBackStack()})
                             Log.d("NavHost", Screen.CryptoDescriptionScreen.route)
                         }
                     }

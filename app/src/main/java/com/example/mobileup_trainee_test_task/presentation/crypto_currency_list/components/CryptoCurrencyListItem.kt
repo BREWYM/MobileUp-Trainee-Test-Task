@@ -1,5 +1,7 @@
 package com.example.mobileup_trainee_test_task.presentation.crypto_currency_list.components
 
+import android.icu.text.DecimalFormat
+import android.icu.text.DecimalFormatSymbols
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,6 +29,7 @@ import coil.compose.AsyncImage
 import com.example.mobileup_trainee_test_task.R
 import com.example.mobileup_trainee_test_task.common.Currency
 import com.example.mobileup_trainee_test_task.domain.models.CryptoCurrency
+import java.util.Locale
 
 @Composable
 fun CryptoCurrencyListItem(
@@ -94,17 +97,19 @@ fun CryptoCurrencyListItem(
                             fontWeight = FontWeight.Bold,
                             color = Color.DarkGray
                             )){
-                            append("${currency.symbol} ${crypto.currentPrice}")
+                            append("${currency.symbol} ${formatCurrency(crypto.currentPrice)}")
                         }
                     }
 
                 )
+                val priceChangeFormat = formatCurrency(crypto.priceChangePercentage24h)
                 Text(
 
+
                     text = if (priceChange>=0) {
-                        "+" + "${crypto.priceChangePercentage24h}%"
+                        "+" + "${priceChangeFormat}%"
                     } else
-                        "${crypto.priceChangePercentage24h}%"
+                        "${priceChangeFormat}%"
                      ,
                     color = if (crypto.priceChangePercentage24h >= 0)
                         Color(0xFF2a9d8f)
@@ -116,4 +121,10 @@ fun CryptoCurrencyListItem(
 
     }
     
+}
+
+fun formatCurrency(value: Double): String{
+    val format = DecimalFormatSymbols(Locale.US)
+    format.groupingSeparator = ','
+    return DecimalFormat("#,##0.##", format).format(value)
 }

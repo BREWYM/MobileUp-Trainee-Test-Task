@@ -13,6 +13,7 @@ import com.example.mobileup_trainee_test_task.common.Currency
 @Composable
 fun ChipList(
     modifier: Modifier = Modifier,
+    selectedCurrency: Currency,
     currencies: List<Currency>,
     onCurrencyChange: (Currency) -> Unit = {}
 ) {
@@ -24,6 +25,7 @@ fun ChipList(
         items(currencies) {
             Chip(
                 currency = it,
+                isSelected = (selectedCurrency==it),
                 currencyChange = onCurrencyChange
             )
         }

@@ -24,9 +24,15 @@ data class CryptoDescriptionDto(
 
 fun CryptoDescriptionDto.toCryptoDescription() : CryptoDescription{
     return CryptoDescription(
-        description = description.en,
+        description = tagCleaner(description.en),
         categories = categories,
-        id = id,
-        symbol= symbol
+        name = name,
+        image = image.large,
+        cryptoId = id
+
     )
+}
+
+fun tagCleaner(description: String): String{
+    return description.replace(Regex("<[^>]*>"),"")
 }

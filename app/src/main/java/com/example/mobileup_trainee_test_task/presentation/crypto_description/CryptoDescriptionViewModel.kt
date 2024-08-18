@@ -9,6 +9,7 @@ import com.example.mobileup_trainee_test_task.common.Constants
 import com.example.mobileup_trainee_test_task.common.Currency
 import com.example.mobileup_trainee_test_task.common.Resource
 import com.example.mobileup_trainee_test_task.domain.use_cases.GetCryptoDescriptionUseCase
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
@@ -30,7 +31,10 @@ class CryptoDescriptionViewModel(
             viewModelScope.launch {  getCryptoCurrency(cryptoId)}
         }
     }
-    private suspend fun getCryptoCurrency(cryptoId: String) {
+    suspend fun refresh(cryptoId: String){
+        getCryptoCurrency(cryptoId = cryptoId)
+    }
+     private suspend fun getCryptoCurrency(cryptoId: String) {
         getCryptoCurrencyDescriptionUseCase(cryptoId).onEach { result ->
             when (result) {
                 is Resource.Success -> {
@@ -47,6 +51,6 @@ class CryptoDescriptionViewModel(
                     _state.value = CryptoDescriptionState(isLoading = true)
                 }
             }
-        }
+        }.launchIn(viewModelScope)
     }
 }
