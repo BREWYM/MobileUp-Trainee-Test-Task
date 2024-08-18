@@ -18,7 +18,7 @@ fun ChipList(
     onCurrencyChange: (Currency) -> Unit = {}
 ) {
     LazyRow(
-        modifier = modifier.padding(start = 10.dp),
+        modifier = modifier.padding(start = 16.dp, bottom = 13.dp, top = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {

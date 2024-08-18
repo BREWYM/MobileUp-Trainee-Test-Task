@@ -4,12 +4,15 @@ package com.example.mobileup_trainee_test_task.presentation.crypto_description
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+
 import androidx.compose.foundation.layout.Column
+
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,7 +53,7 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CryptoDescriptionScreen(
-    cryptoId : String,
+    cryptoId: String,
     viewModel: CryptoDescriptionViewModel = koinViewModel(),
     navigateBack: () -> Unit
 ) {
@@ -97,11 +100,12 @@ fun CryptoDescriptionScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            if (state.error.isBlank()&&!state.isLoading) {
+            if (state.error.isBlank() && !state.isLoading) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
+                        .padding(start = 16.dp, end = 16.dp)
                 )
                 {
                     Row(
@@ -129,25 +133,35 @@ fun CryptoDescriptionScreen(
                                     fontSize = 20.sp
                                 )
                             ) {
-                                append("Описание\n")
-                            }
-                            withStyle(
-                                style = SpanStyle(
-                                    fontWeight = FontWeight.W400,
-                                    color = Color.Black,
-                                    fontSize = 16.sp
-                                )
-                            ) {
-                                state.crypto?.description?.let {
-                                    append(state.crypto.description + "\n")
-                                }
+                                append("Описание")
                             }
                         },
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(16.dp)
+                            .padding(top = 16.dp)
+
                     )
+                    Text(buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.W400,
+                                color = Color.Black,
+                                fontSize = 16.sp
+                            )
+                        ) {
+                            state.crypto?.description?.let {
+                                append(state.crypto.description + "\n")
+                            }
+                        }
+                    },
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(top=8.dp)
+                    )
+
+
                     Text(
                         buildAnnotatedString {
                             withStyle(
@@ -157,8 +171,19 @@ fun CryptoDescriptionScreen(
                                     fontSize = 20.sp
                                 )
                             ) {
-                                append("Категории\n")
+                                append("Категории")
                             }
+                        },
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(
+                                bottom = 8.dp
+                            )
+
+                    )
+                    Text(
+                        buildAnnotatedString {
                             withStyle(
                                 style = SpanStyle(
                                     fontWeight = FontWeight.W400,
@@ -175,26 +200,26 @@ fun CryptoDescriptionScreen(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(
-                                start = 16.dp,
-                                end = 16.dp,
                                 bottom = 20.dp
-                                )
+                            )
 
                     )
                 }
+
             }
+
             if (state.error.isNotBlank()) {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.Center
-                ) {
+                        .fillMaxSize()
+                    ,
+                ){
                     Image(
-                        painter = painterResource(id = R.drawable.btc_logo),
+                        painter = painterResource(id = R.drawable.groupbtc_logo),
                         contentDescription = "logo",
                         modifier = Modifier
-                            .padding(16.dp)
-                            .requiredSize(100.dp)
+                            .padding(top = 272.dp)
+                            .requiredSize(120.dp)
                             .align(Alignment.CenterHorizontally)
                     )
                     Text(
@@ -203,27 +228,26 @@ fun CryptoDescriptionScreen(
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.onError,
                         modifier = Modifier
-                            .padding(horizontal = 20.dp)
-                            .align(Alignment.CenterHorizontally),
+                            .padding(top = 13.dp)
+                            .align(Alignment.CenterHorizontally)
+                        ,
                         style = TextStyle(
                             color = MaterialTheme.colorScheme.onError,
-                            fontSize = 16.sp
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.W400
                         )
-
                     )
-
-
-                    Button(
-                        onClick = { coroutineScope.launch {
+                    Button(onClick = {
+                        coroutineScope.launch {
                             viewModel.refresh(cryptoId)
-                            }
-                        },
+                        }},
                         shape = RoundedCornerShape(6.dp),
                         modifier = Modifier
+                            .width(175.dp)
                             .align(Alignment.CenterHorizontally)
-                            .padding(top = 30.dp),
-
-                        ) {
+                            .padding(top = 30.dp)
+                        ,
+                    ) {
                         Text(text = "ПОПРОБОВАТЬ", fontSize = 16.sp)
                     }
                 }
@@ -236,9 +260,10 @@ fun CryptoDescriptionScreen(
                 )
 
             }
-
         }
 
     }
 
 }
+
+

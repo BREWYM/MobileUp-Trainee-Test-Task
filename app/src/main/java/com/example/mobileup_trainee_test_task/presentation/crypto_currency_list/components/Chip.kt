@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,7 +28,7 @@ fun Chip(modifier: Modifier = Modifier,
     Surface(
 
         modifier = modifier
-            .padding(10.dp)
+            .padding(end = 8.dp)
             .requiredSize(width = 89.dp, height = 32.dp),
         shape = RoundedCornerShape(20.dp),
         color = if (isSelected) Color(0xFFfbefdc)
@@ -45,9 +46,10 @@ fun Chip(modifier: Modifier = Modifier,
         ) {
             Text(
                 text = currency.id.uppercase(),
-                fontSize = 16.sp,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.W400,
                 color = if (isSelected) Color(255, 171, 33)
-                else Color(29, 29, 29),
+                else Color(0, 0, 0),
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     ,

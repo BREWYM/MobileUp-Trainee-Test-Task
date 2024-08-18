@@ -37,7 +37,10 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(
-                            route = Screen.CryptoDescriptionScreen.route + "/{cryptoId}",
+                            route = Screen.CryptoDescriptionScreen.route
+                                    + "/{cryptoId}"
+
+                            ,
                             arguments = listOf(
                                 navArgument("cryptoId") {
                                     type = NavType.StringType
@@ -45,9 +48,9 @@ class MainActivity : ComponentActivity() {
                             )
 
                         ) {
-                            val param = it.arguments?.getString("cryptoId") ?: ""
+                            val cryptoId = it.arguments?.getString("cryptoId") ?: ""
                             CryptoDescriptionScreen(
-                                cryptoId = param,
+                                cryptoId = cryptoId,
                                 navigateBack = { navController.popBackStack() },
                             )
                             Log.d("NavHost", Screen.CryptoDescriptionScreen.route)
