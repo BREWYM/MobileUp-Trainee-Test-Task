@@ -1,7 +1,4 @@
-package com.example.mobileup
-
-
-import com.example.mobileup_trainee_test_task.presentation.crypto_description.CryptoDescriptionViewModel
+package com.example.mobileup_trainee_test_task.presentation.crypto_description
 
 
 import androidx.compose.foundation.Image
@@ -53,7 +50,7 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CryptoDescriptionScreen(
-
+    cryptoId : String,
     viewModel: CryptoDescriptionViewModel = koinViewModel(),
     navigateBack: () -> Unit
 ) {
@@ -77,7 +74,8 @@ fun CryptoDescriptionScreen(
                     },
                     title = {
                         Row(
-                            modifier = Modifier,
+                            modifier = Modifier
+                                .padding(start = 16.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             state.crypto?.let { Text(text = it.name) }
@@ -99,7 +97,7 @@ fun CryptoDescriptionScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            if (state.error.isBlank()) {
+            if (state.error.isBlank()&&!state.isLoading) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -140,15 +138,15 @@ fun CryptoDescriptionScreen(
                                     fontSize = 16.sp
                                 )
                             ) {
-                                state.crypto?.description?.let { append(state.crypto.description + "\n") }
-                                println(state.crypto?.description)
+                                state.crypto?.description?.let {
+                                    append(state.crypto.description + "\n")
+                                }
                             }
                         },
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(start = 16.dp, end = 16.dp)
-                            .padding(bottom = 16.dp)
+                            .padding(16.dp)
                     )
                     Text(
                         buildAnnotatedString {
@@ -168,14 +166,20 @@ fun CryptoDescriptionScreen(
                                     fontSize = 16.sp
                                 )
                             ) {
-                                state.crypto?.let { append(it.categories.joinToString(separator = ", ")) }
+                                state.crypto?.let {
+                                    append(it.categories.joinToString(separator = ", "))
+                                }
                             }
                         },
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(start = 16.dp, end = 16.dp)
-                            .padding(bottom = 20.dp)
+                            .padding(
+                                start = 16.dp,
+                                end = 16.dp,
+                                bottom = 20.dp
+                                )
+
                     )
                 }
             }
@@ -210,7 +214,10 @@ fun CryptoDescriptionScreen(
 
 
                     Button(
-                        onClick = { coroutineScope.launch { state.crypto?.let { viewModel.refresh(it.cryptoId) } } },
+                        onClick = { coroutineScope.launch {
+                            viewModel.refresh(cryptoId)
+                            }
+                        },
                         shape = RoundedCornerShape(6.dp),
                         modifier = Modifier
                             .align(Alignment.CenterHorizontally)
@@ -220,8 +227,6 @@ fun CryptoDescriptionScreen(
                         Text(text = "ПОПРОБОВАТЬ", fontSize = 16.sp)
                     }
                 }
-
-
             }
             if (state.isLoading) {
                 CircularProgressIndicator(

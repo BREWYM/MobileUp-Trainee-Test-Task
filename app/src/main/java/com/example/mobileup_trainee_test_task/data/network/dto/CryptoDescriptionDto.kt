@@ -13,13 +13,8 @@ data class CryptoDescriptionDto(
     val id: String,
     @SerializedName("image")
     val image: Image,
-
     @SerializedName("name")
     val name: String,
-
-    @SerializedName("symbol")
-    val symbol: String,
-
 )
 
 fun CryptoDescriptionDto.toCryptoDescription() : CryptoDescription{

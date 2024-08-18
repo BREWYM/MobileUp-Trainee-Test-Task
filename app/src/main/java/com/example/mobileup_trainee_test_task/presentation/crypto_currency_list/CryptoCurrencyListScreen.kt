@@ -44,11 +44,9 @@ fun CryptoCurrencyListScreen(
     navController: NavController,
     viewModel: CryptoCurrencyListViewModel = koinViewModel()
 ) {
-
     val state = viewModel.state.value
 
     Scaffold(
-
         modifier = Modifier
         ,
         topBar = {
@@ -56,54 +54,39 @@ fun CryptoCurrencyListScreen(
                 modifier = Modifier) {
                 Column() {
                     TopAppBar(
-
                         modifier = Modifier
                             .fillMaxWidth()
-
-
                         ,
                         title = {
                             Column(
                                 verticalArrangement = Arrangement.SpaceBetween,
                                 horizontalAlignment = Alignment.Start
-
                             ) {
                                 Text(
                                     text = "Список криптовалют",
                                     modifier = Modifier
                                 )
-
                             }
                         }
-
                     )
                     Row(
                         horizontalArrangement = Arrangement.Start,
                         modifier = Modifier
-
                     ){
                         ChipList(
                             modifier = Modifier
                                 .fillMaxWidth(),
                             selectedCurrency = viewModel.currency.value
-
                             ,
                             currencies = Currency.entries,
                             onCurrencyChange = { viewModel.selectedCurrencyChange(it) }
                         )
                     }
                 }
-
-
             }
-
-
-
         }
-
     ){
         innerPadding ->
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -112,8 +95,6 @@ fun CryptoCurrencyListScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-
-
             )
             {
                 items(state.cryptos) { crypto ->
@@ -129,7 +110,6 @@ fun CryptoCurrencyListScreen(
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-
                     ,
                     verticalArrangement = Arrangement.Center
                 ){
@@ -151,23 +131,17 @@ fun CryptoCurrencyListScreen(
                             .align(Alignment.CenterHorizontally)
                             ,
                         style = TextStyle(color = MaterialTheme.colorScheme.onError, fontSize = 16.sp)
-
                         )
-
-
                     Button(onClick = { viewModel.selectedCurrencyChange(viewModel.currency.value) },
                         shape = RoundedCornerShape(6.dp),
                         modifier = Modifier
                             .align(Alignment.CenterHorizontally)
                             .padding(top = 30.dp)
                             ,
-
                         ) {
                         Text(text = "ПОПРОБОВАТЬ", fontSize = 16.sp)
                     }
                 }
-
-
             }
             if (state.isLoading) {
                 CircularProgressIndicator(
@@ -175,14 +149,8 @@ fun CryptoCurrencyListScreen(
                         .align(Alignment.Center),
                     color = Color(0xFFFF9F00)
                 )
-
             }
         }
-
-
     }
-
-
-
 }
 

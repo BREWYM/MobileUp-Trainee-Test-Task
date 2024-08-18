@@ -15,7 +15,7 @@ class GetCryptoCurrencyListUseCase(
 
     suspend operator fun invoke(currency: String): Flow<Resource<List<CryptoCurrency>>> = flow {
         try {
-            emit(Resource.Loading<List<CryptoCurrency>>())
+            emit(Resource.Loading())
             val cryptoCurrency = cryptoCurrencyListRepository.getCryptoCurrencyList(currency).map {
                 it.toCryptoCurrency()
             }
@@ -24,13 +24,13 @@ class GetCryptoCurrencyListUseCase(
 
         } catch (e: HttpException) {
             emit(
-                Resource.Error<List<CryptoCurrency>>(
+                Resource.Error(
                     e.localizedMessage ?: "An unexpected HTTP error occurred"
                 )
             )
 
         } catch (e: IOException) {
-            emit(Resource.Error<List<CryptoCurrency>>("An internet error occurred. Please check your connection "))
+            emit(Resource.Error("An internet error occurred. Please check your connection "))
         }
     }
 }

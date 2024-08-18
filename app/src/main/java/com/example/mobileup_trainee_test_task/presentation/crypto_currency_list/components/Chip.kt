@@ -50,7 +50,6 @@ fun Chip(modifier: Modifier = Modifier,
                 else Color(29, 29, 29),
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
-//                    .requiredSize(width = 65.dp, height = 30.dp),
                     ,
                 textAlign = TextAlign.Center
 

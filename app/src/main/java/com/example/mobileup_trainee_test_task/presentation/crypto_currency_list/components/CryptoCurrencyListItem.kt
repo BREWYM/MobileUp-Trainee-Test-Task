@@ -23,8 +23,10 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.substring
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.mobileup_trainee_test_task.R
 import com.example.mobileup_trainee_test_task.common.Currency
@@ -76,14 +78,21 @@ fun CryptoCurrencyListItem(
 
                 Text(
                     buildAnnotatedString {
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.W700, color = Color.DarkGray )){
+                        withStyle(style = SpanStyle(
+                            fontWeight = FontWeight.W500,
+                            color = Color.DarkGray,
+                            fontSize = 16.sp
+                            )){
                             append("${crypto.name}\n")
                         }
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.W300, color = Color.Gray)){
+                        withStyle(style = SpanStyle(
+                            fontWeight = FontWeight.W400,
+                            color = Color.Gray,
+                            fontSize = 14.sp
+                        )){
                             append(crypto.symbol.uppercase())
                         }
                     },
-//                    style = MaterialTheme.typography.bodyMedium,
                     overflow = TextOverflow.Ellipsis
                 )
             }
@@ -94,8 +103,9 @@ fun CryptoCurrencyListItem(
                 Text(
                     buildAnnotatedString {
                         withStyle(style = SpanStyle(
-                            fontWeight = FontWeight.Bold,
-                            color = Color.DarkGray
+                            fontWeight = FontWeight.W600,
+                            color = Color.DarkGray,
+                            fontSize = 16.sp
                             )){
                             append("${currency.symbol} ${formatCurrency(crypto.currentPrice)}")
                         }
@@ -105,16 +115,21 @@ fun CryptoCurrencyListItem(
                 val priceChangeFormat = formatCurrency(crypto.priceChangePercentage24h)
                 Text(
 
+                    buildAnnotatedString {
+                        withStyle(style = SpanStyle(
+                            fontWeight = FontWeight.W400,
+                            color = if (crypto.priceChangePercentage24h >= 0)
+                                Color(0xFF2a9d8f)
+                            else Color(0xFFeb5757)
+                        )
+                        ){
+                            append(if (priceChange>=0) {
+                                "+ " + "${priceChangeFormat}%"
+                            } else
+                                "- ${priceChangeFormat.substring(1)}%")
+                        }
+                    }
 
-                    text = if (priceChange>=0) {
-                        "+" + "${priceChangeFormat}%"
-                    } else
-                        "${priceChangeFormat}%"
-                     ,
-                    color = if (crypto.priceChangePercentage24h >= 0)
-                        Color(0xFF2a9d8f)
-                    else Color(0xFFeb5757),
-                    style = MaterialTheme.typography.bodySmall
                 )
             }
         }

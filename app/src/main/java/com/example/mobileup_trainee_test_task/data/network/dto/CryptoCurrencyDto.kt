@@ -13,8 +13,6 @@ data class CryptoCurrencyDto(
     val image: String,
     @SerializedName("name")
     val name: String,
-    @SerializedName("price_change_24h")
-    val priceChange24h: Double,
     @SerializedName("price_change_percentage_24h")
     val priceChangePercentage: Double,
     @SerializedName("symbol")

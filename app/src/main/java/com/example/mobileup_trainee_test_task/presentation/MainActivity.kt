@@ -6,10 +6,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.mobileup.CryptoDescriptionScreen
+import androidx.navigation.navArgument
+import com.example.mobileup_trainee_test_task.presentation.crypto_description.CryptoDescriptionScreen
 import com.example.mobileup_trainee_test_task.presentation.crypto_currency_list.CryptoCurrencyListScreen
 import com.example.mobileup_trainee_test_task.presentation.theme.MobileUpTraineeTestTaskTheme
 
@@ -23,20 +25,31 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     val navController = rememberNavController()
-                    NavHost(navController = navController,
-                        startDestination = Screen.CryptoCurrencyListScreen.route ){
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.CryptoCurrencyListScreen.route
+                    ) {
                         composable(
                             route = Screen.CryptoCurrencyListScreen.route
-                        ){
+                        ) {
                             CryptoCurrencyListScreen(navController = navController)
                             Log.d("NavHost", Screen.CryptoCurrencyListScreen.route)
                         }
 
                         composable(
-                            route = Screen.CryptoDescriptionScreen.route +"/{cryptoId}"
+                            route = Screen.CryptoDescriptionScreen.route + "/{cryptoId}",
+                            arguments = listOf(
+                                navArgument("cryptoId") {
+                                    type = NavType.StringType
+                                }
+                            )
 
-                        ){
-                            CryptoDescriptionScreen(navigateBack = { navController.popBackStack()})
+                        ) {
+                            val param = it.arguments?.getString("cryptoId") ?: ""
+                            CryptoDescriptionScreen(
+                                cryptoId = param,
+                                navigateBack = { navController.popBackStack() },
+                            )
                             Log.d("NavHost", Screen.CryptoDescriptionScreen.route)
                         }
                     }

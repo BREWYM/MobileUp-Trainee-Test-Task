@@ -18,12 +18,12 @@ class CryptoDescriptionViewModel(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = mutableStateOf<CryptoDescriptionState>(
+    private val _state = mutableStateOf(
         CryptoDescriptionState()
     )
     val state: State<CryptoDescriptionState> = _state
 
-    private val _currency = mutableStateOf<Currency>(Currency.USD)
+    private val _currency = mutableStateOf(Currency.USD)
     val currency: State<Currency> = _currency
 
     init {
@@ -31,8 +31,8 @@ class CryptoDescriptionViewModel(
             viewModelScope.launch {  getCryptoCurrency(cryptoId)}
         }
     }
-    suspend fun refresh(cryptoId: String){
-        getCryptoCurrency(cryptoId = cryptoId)
+    suspend fun refresh(cryptoId: String) {
+        viewModelScope.launch { getCryptoCurrency(cryptoId = cryptoId) }
     }
      private suspend fun getCryptoCurrency(cryptoId: String) {
         getCryptoCurrencyDescriptionUseCase(cryptoId).onEach { result ->
