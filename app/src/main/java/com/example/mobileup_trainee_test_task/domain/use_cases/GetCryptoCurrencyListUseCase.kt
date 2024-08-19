@@ -18,8 +18,9 @@ class GetCryptoCurrencyListUseCase(
             emit(Resource.Loading())
             val cryptoCurrency = cryptoCurrencyListRepository.getCryptoCurrencyList(currency).map {
                 it.toCryptoCurrency()
+
             }
-            cryptoCurrency.forEach{ println(it)}
+           cryptoCurrency.forEach{ println(it)}
             emit(Resource.Success(cryptoCurrency))
 
         } catch (e: HttpException) {

@@ -7,7 +7,12 @@ plugins {
 android {
     namespace = "com.example.mobileup_trainee_test_task"
     compileSdk = 34
-
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.1.1"
+    }
     defaultConfig {
         applicationId = "com.example.mobileup_trainee_test_task"
         minSdk = 24
@@ -51,7 +56,8 @@ android {
 }
 
 dependencies {
-
+    //Toast
+//    implementation (libs.toasty)
     //Coil
     implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
@@ -59,16 +65,17 @@ dependencies {
     implementation(libs.retrofit)
 
     // Retrofit with Kotlin serialization Converter
-    implementation(libs.retrofit2.kotlinx.serialization.converter)
-    implementation(libs.okhttp)
     implementation (libs.converter.gson)
 
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
 
     implementation(libs.kotlinx.serialization.json)
-
+    //Фичи
+    implementation(libs.androidx.compose.material3.material3)
+    implementation(libs.androidx.material3.adaptive.navigation.suite)
     implementation(libs.androidx.core.ktx)
+
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

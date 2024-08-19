@@ -6,5 +6,4 @@ data class CryptoDescription(
     val name: String,
     val image: String,
     val cryptoId: String
-) {
-}
+)

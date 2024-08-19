@@ -16,13 +16,13 @@ class GetCryptoDescriptionUseCase(
         try {
             emit(Resource.Loading())
             val cryptoDescription = cryptoDescriptionRepository.getCryptoDescription(id = id).toCryptoDescription()
-            emit(Resource.Success<CryptoDescription>(cryptoDescription))
+            emit(Resource.Success(cryptoDescription))
 
         } catch (e: HttpException){
-            emit(Resource.Error<CryptoDescription>(e.localizedMessage?: "An unexpected HTTP error occurred"))
+            emit(Resource.Error(e.localizedMessage?: "An unexpected HTTP error occurred"))
 
         } catch (e: IOException){
-            emit(Resource.Error<CryptoDescription>("An internet error occurred. Please check your connection "))
+            emit(Resource.Error("An internet error occurred. Please check your connection "))
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.mobileup_trainee_test_task.presentation.crypto_description
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -27,9 +26,10 @@ class CryptoDescriptionViewModel(
     private val _currency = mutableStateOf(Currency.USD)
     val currency: State<Currency> = _currency
 
+
+
     init {
         savedStateHandle.get<String>(Constants.PARAM_CRYPTO_ID)?.let { cryptoId ->
-            Log.d("DEBUG", cryptoId.plus(" HIIIII"))
             viewModelScope.launch {  getCryptoCurrency(cryptoId)}
         }
     }
@@ -46,6 +46,7 @@ class CryptoDescriptionViewModel(
                 is Resource.Error -> {
                     _state.value = CryptoDescriptionState(
                         error = result.message ?: "An unexpected error occurred"
+
                     )
                 }
 

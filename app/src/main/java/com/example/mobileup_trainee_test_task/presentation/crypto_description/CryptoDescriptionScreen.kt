@@ -4,9 +4,7 @@ package com.example.mobileup_trainee_test_task.presentation.crypto_description
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-
 import androidx.compose.foundation.layout.Column
-
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,6 +51,7 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CryptoDescriptionScreen(
+    cryptoName: String,
     cryptoId: String,
     viewModel: CryptoDescriptionViewModel = koinViewModel(),
     navigateBack: () -> Unit
@@ -81,7 +80,7 @@ fun CryptoDescriptionScreen(
                                 .padding(start = 16.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            state.crypto?.let { Text(text = it.name) }
+                            Text(text = cryptoName)
 
                         }
                     }

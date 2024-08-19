@@ -11,8 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.mobileup_trainee_test_task.presentation.crypto_description.CryptoDescriptionScreen
 import com.example.mobileup_trainee_test_task.presentation.crypto_currency_list.CryptoCurrencyListScreen
+import com.example.mobileup_trainee_test_task.presentation.crypto_description.CryptoDescriptionScreen
 import com.example.mobileup_trainee_test_task.presentation.theme.MobileUpTraineeTestTaskTheme
 
 class MainActivity : ComponentActivity() {
@@ -38,18 +38,22 @@ class MainActivity : ComponentActivity() {
 
                         composable(
                             route = Screen.CryptoDescriptionScreen.route
-                                    + "/{cryptoId}"
-
+                                    + "/{cryptoId}" + "/{cryptoName}"
                             ,
                             arguments = listOf(
                                 navArgument("cryptoId") {
+                                    type = NavType.StringType
+                                },
+                                navArgument("cryptoName"){
                                     type = NavType.StringType
                                 }
                             )
 
                         ) {
                             val cryptoId = it.arguments?.getString("cryptoId") ?: ""
+                            val cryptoName = it.arguments?.getString("cryptoName") ?: ""
                             CryptoDescriptionScreen(
+                                cryptoName = cryptoName,
                                 cryptoId = cryptoId,
                                 navigateBack = { navController.popBackStack() },
                             )
