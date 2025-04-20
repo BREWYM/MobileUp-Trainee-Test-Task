@@ -20,7 +20,6 @@ class GetCryptoCurrencyListUseCase(
                 it.toCryptoCurrency()
 
             }
-           cryptoCurrency.forEach{ println(it)}
             emit(Resource.Success(cryptoCurrency))
 
         } catch (e: HttpException) {
