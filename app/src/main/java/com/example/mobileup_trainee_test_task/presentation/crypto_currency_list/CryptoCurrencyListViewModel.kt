@@ -28,7 +28,7 @@ class CryptoCurrencyListViewModel(
     private var _lastSucceededData = mutableStateOf(emptyList<CryptoCurrency>())
     val lastSucceededData = _lastSucceededData
 
-    private val _refreshError = mutableStateOf(false)
+    private val _refreshError = mutableStateOf<Boolean>(false)
     val refreshError: State<Boolean> = _refreshError
 
     init {
@@ -47,6 +47,7 @@ class CryptoCurrencyListViewModel(
     }
 
     private suspend fun getCryptoCurrencies() {
+        _refreshError.value = false
         getCryptoCurrencyListUseCase(_currency.value.id).onEach { result ->
 
             when (result) {
@@ -77,10 +78,9 @@ class CryptoCurrencyListViewModel(
                 }
 
                 is Resource.Loading -> {
-                    _refreshError.value = false
                     _state.value = CryptoCurrencyListState(
                         isLoading = true,
-                        cryptos = _lastSucceededData.value
+                        cryptos =  _lastSucceededData.value
                     )
 
                 }

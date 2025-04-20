@@ -1,10 +1,10 @@
 [versions]
-agp = "8.5.2"
+agp = "8.9.1"
 coilCompose = "2.7.0"
 converterGson = "2.9.0"
 koinAndroid = "3.5.6"
 koinAndroidxCompose = "3.5.6"
-kotlin = "1.9.0"
+kotlin = "2.1.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -22,10 +22,18 @@ retrofit2KotlinxSerializationConverter = "1.0.0"
 navigationRuntimeKtx = "2.7.7"
 navigationCompose = "2.7.7"
 toasty = "1.5.2"
+gmsVersion = "4.4.2"
+bomVersion="33.12.0"
+firebase-auth="23.2.0"
+
 
 [libraries]
 androidx-compose-material3-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "bomVersion" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref ="firebase-auth" }
+
 androidx-material3-adaptive-navigation-suite = { module = "androidx.compose.material3:material3-adaptive-navigation-suite", version.ref = "material3AdaptiveNavigationSuite" }
 androidx-navigation-compose-v240beta02 = { module = "androidx.navigation:navigation-compose", version.ref = "navigationComposeVersion" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
@@ -57,4 +65,6 @@ toasty = { module = "com.github.GrenderG:Toasty", version.ref = "toasty" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+gms = { id = "com.google.gms.google-services", version.ref = "gmsVersion" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

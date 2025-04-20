@@ -11,9 +11,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.mobileup_trainee_test_task.domain.repositories.AuthRepository
+import com.example.mobileup_trainee_test_task.presentation.auth_check.AuthCheckScreen
 import com.example.mobileup_trainee_test_task.presentation.crypto_currency_list.CryptoCurrencyListScreen
 import com.example.mobileup_trainee_test_task.presentation.crypto_description.CryptoDescriptionScreen
+import com.example.mobileup_trainee_test_task.presentation.login.LoginScreen
+import com.example.mobileup_trainee_test_task.presentation.registration.RegistrationScreen
 import com.example.mobileup_trainee_test_task.presentation.theme.MobileUpTraineeTestTaskTheme
+import org.koin.android.ext.android.get
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +32,29 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.CryptoCurrencyListScreen.route
+                        startDestination = Screen.AuthCheckScreen.route
                     ) {
+                        composable (
+                            route = Screen.AuthCheckScreen.route
+                        ) {
+                            AuthCheckScreen(
+                                navController,
+                                authRepository = get<AuthRepository>()
+                            )
+                            Log.d("NavHost", Screen.AuthCheckScreen.route)
+                        }
+                        composable(
+                            route = Screen.LoginScreen.route
+                        ) {
+                            LoginScreen(navController = navController)
+                            Log.d("NavHost", Screen.LoginScreen.route)
+                        }
+                        composable(
+                            route = Screen.RegistrationScreen.route
+                        ) {
+                            RegistrationScreen(navController = navController)
+                            Log.d("NavHost", Screen.RegistrationScreen.route)
+                        }
                         composable(
                             route = Screen.CryptoCurrencyListScreen.route
                         ) {
